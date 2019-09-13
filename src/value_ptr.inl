@@ -20,7 +20,6 @@ namespace odm
 
 	static const float* value_ptr(const Matrix4x4& mat)
 	{
-		const float* fl = &(mat.m[0].x);
-		return fl;
+		return &(mat.m[0].x);
 	}
 }
