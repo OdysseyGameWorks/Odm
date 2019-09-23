@@ -8,6 +8,7 @@ project "Odm"
 
         files
         {
+	    "**.hpp",
             "src/**.hpp",
             "src/**.inl",
             "src/**.cpp"
