@@ -1,0 +1,13 @@
+# visual studio user data
+.vs/
+
+# build directories
+bin/
+bin-int/
+
+# visual studio
+*.sln
+*.vcxproj*
+  
+# local update command file
+AddGitSubmodules.bat
