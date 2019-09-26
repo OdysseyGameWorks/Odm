@@ -71,5 +71,10 @@ namespace odm
 		Result[3][2] = vec3::Dot(f, eye);
 		return Result;
 	}
+	
+	Vector3f getPosition(const Matrix4x4& transform)
+	{
+		return Vector3f(transform[3][0], transform[3][1], transform[3][2]);
+	}
 
 }
