@@ -1,5 +1,6 @@
 #pragma once
 
+#include "src/MathUtil.hpp"
 #include "src/Vector2f.hpp"
 #include "src/Vector3f.hpp"
 #include "src/Vector4f.hpp"

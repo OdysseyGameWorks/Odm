@@ -39,6 +39,7 @@ namespace odm
 	*/
 	__forceinline Matrix4x4 lookAt(const Vector3f& eye, const Vector3f& center, const Vector3f& up = Vector3f::Up);
 
+	[[nodiscard]] __forceinline Vector3f getPosition(const Matrix4x4& transform);
 }
 
 #include "Transform_mat.inl"

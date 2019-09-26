@@ -50,7 +50,8 @@ namespace odm
 		return Result;
 	}
 
-	__forceinline Matrix4x4 lookAt(const Vector3f& eye, const Vector3f& center, const Vector3f& up)
+	
+	Matrix4x4 lookAt(const Vector3f& eye, const Vector3f& center, const Vector3f& up)
 	{
 		vec3 const f(vec3::Normalize(center - eye));
 		vec3 const s(vec3::Normalize(vec3::Cross(f, up)));
@@ -70,6 +71,11 @@ namespace odm
 		Result[3][1] = -vec3::Dot(u, eye);
 		Result[3][2] = vec3::Dot(f, eye);
 		return Result;
+	}
+
+	Vector3f getPosition(const Matrix4x4& transform)
+	{
+		return Vector3f(transform[3][0], transform[3][1], transform[3][2]);
 	}
 
 }

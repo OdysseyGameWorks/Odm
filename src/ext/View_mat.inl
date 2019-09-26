@@ -10,11 +10,8 @@ namespace odm
 		Matrix4x4 result(1);
 
 		result[0][0] = 2.0f / (right - left);
-
 		result[1][1] = 2.0f / (top - bottom);
-
 		result[2][2] = -2.0f / (farPlane - nearPlane);
-
 		result[3][0] = -(right + left) / (right - left);
 		result[3][1] = -(top + bottom) / (top - bottom);
 		result[3][2] = -(farPlane + nearPlane) / (farPlane - nearPlane);
