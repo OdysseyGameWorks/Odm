@@ -20,10 +20,6 @@ namespace odm
 	Matrix4x4 perspective(float fovy, float aspect, float zNear, float zFar)
 	{
 		Matrix4x4 Result(0.0f);
-<<<<<<< HEAD
-
-=======
->>>>>>> 661b4b7edf044018e1cdcbca05b583e82c13a4bf
 		float const tanHalfFovy = tan(fovy / static_cast<float>(2));
 		Result[0][0] = static_cast<float>(1) / (aspect * tanHalfFovy);
 		Result[1][1] = static_cast<float>(1) / (tanHalfFovy);
