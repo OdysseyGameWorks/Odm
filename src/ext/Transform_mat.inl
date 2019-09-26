@@ -78,9 +78,4 @@ namespace odm
 		return Vector3f(transform[3][0], transform[3][1], transform[3][2]);
 	}
 
-	Vector3f getPosition(const Matrix4x4& transform)
-	{
-		return Vector3f(transform[3][0], transform[3][1], transform[3][2]);
-	}
-
 }
