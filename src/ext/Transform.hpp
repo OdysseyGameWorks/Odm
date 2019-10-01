@@ -1,11 +1,5 @@
 #pragma once
 
-/*
- Author - Odyssey.
- Specially developed maths library of game development.
- Heavily commented for the user to be able to understand easily.
- */
-
 #ifndef _TRANSFORM_H_
 #define _TRANSFORM_H_
 
