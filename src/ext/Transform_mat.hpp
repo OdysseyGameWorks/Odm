@@ -19,9 +19,9 @@ namespace odm
 	 * Builds a rotation 4x4 matrix created from vector of 3 components.
 	 * @param m Input matrix multiplied by this rotation matrix.
 	 * @parma angle Rotation angle expressed in radians.
-	 * @param axis Rotation axis recommended to be normalized.
+	 * @param v Rotation axis recommended to be normalized.
 	*/
-	__forceinline Matrix4x4 rotate(const Matrix4x4& m, const float angle, const Vector3f& axis);
+	__forceinline Matrix4x4 rotate(const Matrix4x4& m, const float angle, const Vector3f& v);
 
 
 	/**

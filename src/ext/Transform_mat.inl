@@ -1,5 +1,5 @@
-#include "Transform_mat.hpp"
 #pragma once
+#include "Transform_mat.hpp"
 
 namespace odm
 {
@@ -16,8 +16,8 @@ namespace odm
 		float const c = cos(a);
 		float const s = sin(a);
 
-		vec3 axis(vec3::Normalize(v));
-		vec3 temp((float(1) - c) * axis);
+		const vec3 axis(vec3::Normalize(v));
+		const vec3 temp((float(1) - c) * axis);
 
 		Matrix4x4 Rotate(m);
 		Rotate[0][0] = c + temp[0] * axis[0];
@@ -77,5 +77,4 @@ namespace odm
 	{
 		return Vector3f(transform[3][0], transform[3][1], transform[3][2]);
 	}
-
 }

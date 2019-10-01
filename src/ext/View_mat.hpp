@@ -20,7 +20,8 @@ namespace odm
 	 * @param aspectRatio Takes in the aspect ratio of the screen.
 	 * @param nearPlane Takes in the near plane of the perspective frustum.
 	 * @param farPlane Takes in the far plane of the perspective frustum.
-	*/
+	 * @return Perspective matrix.
+	 */
 	__forceinline Matrix4x4 perspective(float _fov, float aspectRatio, float nearPlane, float farPlane);
 
 
@@ -32,7 +33,8 @@ namespace odm
 	 * @param bottom Takes in the normalized bottom side of the orthographic view.
 	 * @param bottom Takes in the normalized near plane of the orthographic frustum.
 	 * @param bottom Takes in the normalized far plane of the orthographic frustum.
-	*/
+	 * @return Perspective matrix.
+	 */
 	__forceinline Matrix4x4 orthographic(float left, float right, float top, float bottom, float nearPlane, float farPlane);
 
 }

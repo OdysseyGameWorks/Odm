@@ -17,15 +17,15 @@ namespace odm
 		return result;
 	}
 
-	Matrix4x4 perspective(float fovy, float aspect, float zNear, float zFar)
+	Matrix4x4 perspective(float _fov, float aspectRatio, float nearPlane, float farPlane)
 	{
 		Matrix4x4 Result(0.0f);
-		float const tanHalfFovy = tan(fovy / static_cast<float>(2));
-		Result[0][0] = static_cast<float>(1) / (aspect * tanHalfFovy);
+		float const tanHalfFovy = tan(_fov / static_cast<float>(2));
+		Result[0][0] = static_cast<float>(1) / (aspectRatio * tanHalfFovy);
 		Result[1][1] = static_cast<float>(1) / (tanHalfFovy);
-		Result[2][2] = -(zFar + zNear) / (zFar - zNear);
+		Result[2][2] = -(farPlane + nearPlane) / (farPlane - nearPlane);
 		Result[2][3] = -static_cast<float>(1);
-		Result[3][2] = -(static_cast<float>(2) * zFar * zNear) / (zFar - zNear);
+		Result[3][2] = -(static_cast<float>(2) * farPlane * nearPlane) / (farPlane - nearPlane);
 		return Result;
 	}
 }

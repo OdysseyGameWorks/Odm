@@ -8,12 +8,13 @@
 
 #ifndef _COLOR_H_
 #define _COLOR_H_
-#define OneOver250 (1/250)
 
 #include "Vector4f.hpp"
 
 namespace odm
 {
+	constexpr auto OneOver255 = (1 / 255);
+
 	struct Color
 	{
 		float r,
@@ -60,8 +61,8 @@ namespace odm
 		__forceinline explicit Color(const Vector3f& vector);
 
 
-		/** Dtor */
-		__forceinline ~Color() { delete this; }
+		/** Destructor */
+		__forceinline ~Color() = default;
 
 	public:
 		
@@ -69,15 +70,15 @@ namespace odm
 
 		/**
 		 * Checks the equality of two color values.
-		 * @param c The colour to compare with.
+		 * @param c The color to compare with.
 		*/
-		__forceinline const bool operator==(const Color& c);
+		__forceinline bool operator==(const Color& c);
 
 		/**
 		 * Checks the non-equality of two color values.
-		 * @param c The colour to compare with.
+		 * @param c The color to compare with.
 		*/
-		__forceinline const bool operator!=(const Color& c);
+		__forceinline bool operator!=(const Color& c);
 
 
 	public:

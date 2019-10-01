@@ -36,7 +36,7 @@ namespace odm
 
 		/**
 		 * Constructs a vector.
-		 * Inializes all coords to 0.
+		 * Initializes all coords to 0.
 		*/
 		__forceinline Vector3f();
 
@@ -80,7 +80,7 @@ namespace odm
 		__forceinline Vector3f(const Vector2f& v);
 
 
-		/** dtor */
+		/** Destructor */
 		__forceinline ~Vector3f() = default;
 
 
@@ -90,19 +90,19 @@ namespace odm
 		 * Calculates the absolute value of the vector coords.
 		 * @return Abs value of this Vector.
 		*/
-		__forceinline Vector3f Abs() const;
+		[[nodiscard]] __forceinline Vector3f Abs() const;
 
 		/**
 		 * Returns the length of the vector
 		*/
-		__forceinline float Length() const;
+		[[nodiscard]] __forceinline float Length() const;
 
 		/**
 		 * Calculates the distance between two vectors.
 		 * @param v Vector from which distance will be calculated.
 		 * @return distance between two vectors in float.
 		*/
-		__forceinline float Distance(const Vector3f& v) const;
+		[[nodiscard]] __forceinline float Distance(const Vector3f& v) const;
 
 		/**
 		 * Calculates the distance between two vectors.
@@ -117,7 +117,7 @@ namespace odm
 		 * @param v Vector which would be dot multiplied.
 		 * @return dot product between two vectors in Vector3.
 		*/
-		__forceinline float Dot(const Vector3f& v) const;
+		[[nodiscard]] __forceinline float Dot(const Vector3f& v) const;
 
 		/**
 		 * Calculates the dot product two vectors.
@@ -140,11 +140,11 @@ namespace odm
 		 * @param v Vector which would be cross multiplied.
 		 * @return distace between two vectors in Vector3.
 		*/
-		__forceinline Vector3f Cross(const Vector3f& v) const;
+		[[nodiscard]] __forceinline Vector3f Cross(const Vector3f& v) const;
 
 
 		/** Returns the normalized vector. */
-		__forceinline Vector3f Normalize() const;
+		[[nodiscard]] __forceinline Vector3f Normalize() const;
 
 		/** 
 		 * Returns the normalized vector.
@@ -157,19 +157,19 @@ namespace odm
 
 		/**
 		 * Sets the x coord of the vector.
-		 * @param value to be set to the coord.
+		 * @param val to be set to the coord.
 		*/
 		__forceinline void SetX(float val) { x = val; }
 
 		/**
-		 * Sets the x coord of the vector.
-		 * @param value to be set to the coord.
+		 * Sets the y coord of the vector.
+		 * @param val to be set to the coord.
 		*/
 		__forceinline void SetY(float val) { y = val; }
 
 		/**
-		 * Sets the x coord of the vector.
-		 * @param value to be set to the coord.
+		 * Sets the z coord of the vector.
+		 * @param val to be set to the coord.
 		*/
 		__forceinline void SetZ(float val) { z = val; }
 
@@ -177,7 +177,7 @@ namespace odm
 
 		// --- GETTERS ---
 
-		/** Gets the value x coord of the vector. */
+		/** Gets the value X coord of the vector. */
 		__forceinline float GetX() { return x; }
 
 		/** Gets the value x coord of the vector. */
@@ -189,7 +189,7 @@ namespace odm
 	public:
 		// --- OPERATORS ---
 
-		__forceinline void operator=(const Vector3f& vec);
+		__forceinline Vector3f& operator=(const Vector3f& vec);
 
 		/**
 		 * Checks if two vectors are equal.
@@ -363,7 +363,7 @@ namespace odm
 			return *this;
 	}
 
-	__forceinline void Vector3f::operator=(const Vector3f& vec)
+	__forceinline Vector3f& Vector3f::operator=(const Vector3f& vec)
 	{
 		x = vec.x;
 		y = vec.y;
