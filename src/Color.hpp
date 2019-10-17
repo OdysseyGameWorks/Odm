@@ -9,12 +9,12 @@
 #ifndef _COLOR_H_
 #define _COLOR_H_
 
+#define OneOver255 (1.0f / 255.0f)
+
 #include "Vector4f.hpp"
 
 namespace odm
 {
-	constexpr auto OneOver255 = (1 / 255);
-
 	struct Color
 	{
 		float r,
@@ -24,7 +24,7 @@ namespace odm
 
 		/**
 		 * Constructs a color.
-		 * Sets a white color.
+		 * Sets a black color.
 		*/
 		__forceinline Color();
 
@@ -33,19 +33,19 @@ namespace odm
 		 * Constructs a color by copying from the other color object.
 		 * @param color Object to copy the values from.
 		*/
-		__forceinline Color(const Color& color);
+		__forceinline Color(const Color& color) = default;
 
 
 		/**
 		 * Constructs a color setting the value of rgba.
-		 * @param r Sets the Red component.
-		 * @param g Sets the Green component.
-		 * @param b Sets the Blue component.
-		 * @param a Sets the Alpha component.
+		 * @param rf Sets the Red component.
+		 * @param gf Sets the Green component.
+		 * @param bf Sets the Blue component.
+		 * @param af Sets the Alpha component.
 		*/
-		__forceinline explicit Color(float r, float g, float b, float a = 1.0f);
+		__forceinline explicit Color(float rf, float gf, float bf, float af = 1.0f);
 
-
+		
 		/**
 		 * Constructs a color by copying values from vector4.
 		 * @param vector Vector4 to copy the values of rgba channels.
@@ -71,14 +71,31 @@ namespace odm
 		/**
 		 * Checks the equality of two color values.
 		 * @param c The color to compare with.
+		 * @returns True if the compared color is equal.
 		*/
-		__forceinline bool operator==(const Color& c);
+		__forceinline bool operator==(const Color& c) const;
 
 		/**
 		 * Checks the non-equality of two color values.
 		 * @param c The color to compare with.
+		 * * @returns True if the compared color is not equal.
 		*/
-		__forceinline bool operator!=(const Color& c);
+		__forceinline bool operator!=(const Color& c) const;
+
+	public:
+
+		// --- METHODS ---
+
+		/**
+		 * Sets the color between 0 to 1.
+		 * @param c Takes the color to be converted to lower scale.
+		 * @returns RGBA color between the range of 0 to 1. 
+		 */
+		__forceinline static Color toSmallerScale(const Color& c);
+
+		__forceinline static Color toSmallerScale(float r, float g, float b, float a);
+
+		__forceinline static std::string Stringify(const Color& c);
 
 
 	public:
@@ -193,12 +210,8 @@ namespace odm
 		r = g = b = 0.0f, a = 1.0f;
 	}
 
-	__forceinline Color::Color(const Color& color)
-		: r(color.r), g(color.g), b(color.b), a(color.a)
-	{}
-
-	__forceinline Color::Color(float r, float g, float b, float a)
-		: r(r), g(g), b(b), a(a)
+	__forceinline Color::Color(float rf, float gf, float bf, float af)
+		: r(rf), g(gf), b(bf), a(af)
 	{}
 
 	__forceinline Color::Color(const Vector4f& vector)
@@ -209,14 +222,29 @@ namespace odm
 		: r(vector.x), g(vector.y), b(vector.z), a(1.0f)
 	{}
 
-	__forceinline const bool Color::operator==(const Color & c)
+	__forceinline bool Color::operator==(const Color & c) const
 	{
 		return (r == c.r && g == c.g && b == c.b && a == c.a);
 	}
 
-	__forceinline const bool Color::operator!=(const Color& c)
+	__forceinline bool Color::operator!=(const Color& c) const
 	{
 		return !(r == c.r && g == c.g && b == c.b && a == c.a);
+	}
+
+	__forceinline Color Color::toSmallerScale(const Color& c)
+	{
+		return Color(c.r * OneOver255, c.g * OneOver255, c.b * OneOver255, c.a * OneOver255);
+	}
+
+	__forceinline Color Color::toSmallerScale(float r, float g, float b, float a)
+	{
+		return Color(r * OneOver255, g * OneOver255, b * OneOver255, a * OneOver255);
+	}
+
+	__forceinline std::string Color::Stringify(const Color& c)
+	{
+		
 	}
 
 	

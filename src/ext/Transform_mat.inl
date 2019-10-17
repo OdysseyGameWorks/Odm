@@ -5,9 +5,9 @@ namespace odm
 {
 	Matrix4x4 translate(const Matrix4x4& m, const Vector3f& v)
 	{
-		Matrix4x4 mat(m);
-		mat[3] = vec4(v, 1.0);
-		return mat;
+		mat4 Result(m);
+ 		Result[3] = m[0] * v[0] + m[1] * v[1] + m[2] * v[2] + m[3];
+		return Result;
 	}
 
 	Matrix4x4 rotate(const Matrix4x4& m, const float angle, const Vector3f& v)
@@ -19,7 +19,7 @@ namespace odm
 		const vec3 axis(vec3::Normalize(v));
 		const vec3 temp((float(1) - c) * axis);
 
-		Matrix4x4 Rotate(m);
+		Matrix4x4 Rotate;
 		Rotate[0][0] = c + temp[0] * axis[0];
 		Rotate[0][1] = temp[0] * axis[1] + s * axis[2];
 		Rotate[0][2] = temp[0] * axis[2] - s * axis[1];
@@ -32,7 +32,7 @@ namespace odm
 		Rotate[2][1] = temp[2] * axis[1] - s * axis[0];
 		Rotate[2][2] = c + temp[2] * axis[2];
 
-		Matrix4x4 Result(m);
+		Matrix4x4 Result;
 		Result[0] = m[0] * Rotate[0][0] + m[1] * Rotate[0][1] + m[2] * Rotate[0][2];
 		Result[1] = m[0] * Rotate[1][0] + m[1] * Rotate[1][1] + m[2] * Rotate[1][2];
 		Result[2] = m[0] * Rotate[2][0] + m[1] * Rotate[2][1] + m[2] * Rotate[2][2];
@@ -40,13 +40,13 @@ namespace odm
 		return Result;
 	}
 
-	Matrix4x4 scale(const Matrix4x4& m, const Vector3f& v)
+	const Matrix4x4 scale(const Matrix4x4& m, const Vector3f& v)
 	{
 		Matrix4x4 Result(m);
-		Result[0][0] *= m[0][0] * v[0];
-		Result[1][1] *= m[1][1] * v[1];
-		Result[2][2] *= m[2][2] * v[2];
-		Result[3][3] *= m[3][3];
+		Result[0][0] = m[0][0] * v[0];
+		Result[1][1] = m[1][1] * v[1];
+		Result[2][2] = m[2][2] * v[2];
+		Result[3][3] = m[3][3];
 		return Result;
 	}
 
@@ -72,7 +72,14 @@ namespace odm
 		Result[3][2] = vec3::Dot(f, eye);
 		return Result;
 	}
-	
+
+	Matrix4x4 setPosition(const Matrix4x4& mat, const vec3f position)
+	{
+		mat4 Result(mat);
+		Result[3] = vec4(position, mat[3][3]);
+		return Result;
+	}
+
 	Vector3f getPosition(const Matrix4x4& transform)
 	{
 		return Vector3f(transform[3][0], transform[3][1], transform[3][2]);

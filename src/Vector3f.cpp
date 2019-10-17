@@ -8,6 +8,6 @@ namespace odm
 	const Vector3f Vector3f::Down(0, -1, 0);
 	const Vector3f Vector3f::Forward(0, 0, 1);
 	const Vector3f Vector3f::Back(0, 0, -1);
-	const Vector3f Vector3f::Left(-1, 0, 0);
+	const Vector3f Vector3f::Left(1, 0, 0);
 	const Vector3f Vector3f::Right(-1, 0, 0);
 }

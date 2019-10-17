@@ -53,7 +53,7 @@ namespace odm
 
 		/**
 		 * Constructs a 4x4 matrix.
-		 * Initializes all the elements according to args.
+		 * Initializes all the elements according to arguments.
 		*/
 		__forceinline Matrix4x4(
 			float x0, float y0, float z0, float w0,
@@ -92,8 +92,8 @@ namespace odm
 
 	};
 
-	typedef Matrix4x4 mat4;
-	typedef Matrix4x4 mat4x4;
+	using mat4 = Matrix4x4 ;
+	using mat4x4 = Matrix4x4;
 
 
 	__forceinline Vector4f& Matrix4x4::operator[](int colIndex)

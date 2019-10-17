@@ -45,7 +45,7 @@ namespace odm
 		 * Constructs from anther vector.
 		 * @param v Takes in another vector to copy coords value.
 		*/
-		__forceinline Vector3f(const Vector3f& v);
+		__forceinline Vector3f(const Vector3f& v) = default;
 
 
 		/**
@@ -90,19 +90,19 @@ namespace odm
 		 * Calculates the absolute value of the vector coords.
 		 * @return Abs value of this Vector.
 		*/
-		[[nodiscard]] __forceinline Vector3f Abs() const;
+		__forceinline Vector3f Abs() const;
 
 		/**
 		 * Returns the length of the vector
 		*/
-		[[nodiscard]] __forceinline float Length() const;
+		__forceinline float Length() const;
 
 		/**
 		 * Calculates the distance between two vectors.
 		 * @param v Vector from which distance will be calculated.
 		 * @return distance between two vectors in float.
 		*/
-		[[nodiscard]] __forceinline float Distance(const Vector3f& v) const;
+		__forceinline float Distance(const Vector3f& v) const;
 
 		/**
 		 * Calculates the distance between two vectors.
@@ -117,7 +117,7 @@ namespace odm
 		 * @param v Vector which would be dot multiplied.
 		 * @return dot product between two vectors in Vector3.
 		*/
-		[[nodiscard]] __forceinline float Dot(const Vector3f& v) const;
+		__forceinline float Dot(const Vector3f& v) const;
 
 		/**
 		 * Calculates the dot product two vectors.
@@ -140,11 +140,11 @@ namespace odm
 		 * @param v Vector which would be cross multiplied.
 		 * @return distace between two vectors in Vector3.
 		*/
-		[[nodiscard]] __forceinline Vector3f Cross(const Vector3f& v) const;
+		__forceinline Vector3f Cross(const Vector3f& v) const;
 
 
 		/** Returns the normalized vector. */
-		[[nodiscard]] __forceinline Vector3f Normalize() const;
+		__forceinline Vector3f Normalize() const;
 
 		/** 
 		 * Returns the normalized vector.
@@ -189,7 +189,7 @@ namespace odm
 	public:
 		// --- OPERATORS ---
 
-		__forceinline Vector3f& operator=(const Vector3f& vec);
+		__forceinline void operator=(const Vector3f& vec);
 
 		/**
 		 * Checks if two vectors are equal.
@@ -207,7 +207,7 @@ namespace odm
 		 * Checks if two vectors are not equal.
 		 * @param v Vector to be compared with.
 		*/
-		__forceinline Vector3f operator+(const Vector3f& v);
+		__forceinline Vector3f operator+(const Vector3f& v) const;
 
 		/**
 		 * Checks if two vectors are not equal.
@@ -239,12 +239,18 @@ namespace odm
 		*/
 		__forceinline Vector3f operator/(float f);
 
+		__forceinline void operator+=(const odm::Vector3f& other);
+		__forceinline void operator-=(const odm::Vector3f& other);
+		__forceinline void operator*=(const odm::Vector3f& other);
+		__forceinline void operator/=(const odm::Vector3f& other);
+		
 		/**
 		 * Index Operator
 		 * @param index Index of the vector component.
-		*/
+		 */
 		__forceinline const float operator[](int index) const;
 
+		/** @brief Negation operator */
 		__forceinline const Vector3f operator-() const;
 
 
@@ -302,10 +308,6 @@ namespace odm
 		: x(x), y(y), z(z)
 	{}
 
-	__forceinline Vector3f::Vector3f(const Vector3f& v)
-		: x(v.x), y(v.y), z(v.z)
-	{}
-
 	__forceinline vec3 Vector3f::Abs() const
 	{
 		return vec3(abs(x), abs(y), abs(z));
@@ -340,9 +342,9 @@ namespace odm
 	{
 		Vector3f result;
 
-		result.x = lhs.y * rhs.z - lhs.z * rhs.y;
-		result.y = lhs.z * rhs.x - lhs.x * rhs.z;
-		result.z = lhs.x * rhs.y - lhs.y * rhs.x;
+		result.x = lhs.y * rhs.z - rhs.y * lhs.z;
+		result.y = lhs.z * rhs.x - rhs.z * lhs.x;
+		result.z = lhs.x * rhs.y - rhs.x * lhs.y;
 
 		return result;
 	}
@@ -363,7 +365,7 @@ namespace odm
 			return *this;
 	}
 
-	__forceinline Vector3f& Vector3f::operator=(const Vector3f& vec)
+	__forceinline void Vector3f::operator=(const Vector3f& vec)
 	{
 		x = vec.x;
 		y = vec.y;
@@ -380,7 +382,7 @@ namespace odm
 		return !(*this == v);
 	}
 
-	__forceinline Vector3f Vector3f::operator+(const Vector3f& v)
+	__forceinline Vector3f Vector3f::operator+(const Vector3f& v) const
 	{
 		return Vector3f(
 			x + v.x,
@@ -432,6 +434,34 @@ namespace odm
 		);
 	}
 
+	__forceinline void Vector3f::operator+=(const odm::Vector3f& other)
+	{
+		this->x += other.x;
+		this->y += other.y;
+		this->z += other.z;
+	}
+
+	__forceinline void Vector3f::operator-=(const odm::Vector3f& other)
+	{
+		this->x -= other.x;
+		this->y -= other.y;
+		this->z -= other.z;
+	}
+	
+	__forceinline void Vector3f::operator*=(const odm::Vector3f& other)
+	{
+		this->x *= other.x;
+		this->y *= other.y;
+		this->z *= other.z;
+	}
+
+	__forceinline void Vector3f::operator/=(const odm::Vector3f& other)
+	{
+		this->x /= other.x;
+		this->y /= other.y;
+		this->z /= other.z;
+	}
+	
 	__forceinline const float Vector3f::operator[](int index) const
 	{
 		switch (index)
