@@ -9,10 +9,9 @@ project "Odm"
 
         files
         {
-	        "**.hpp",
-            "src/**.hpp",
-            "src/**.inl",
-            "src/**.cpp"
+            "odm/**.hpp",
+            "odm/**.inl",
+            "odm/**.cpp"
         }
 
         filter "configurations:Debug"
