@@ -1,4 +1,5 @@
 @echo off
+cd..
 git add .
 git status .
 

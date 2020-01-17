@@ -9,7 +9,7 @@ project "Odm"
 
         files
         {
-            "odm/**.hpp",
+            "odm/**.h",
             "odm/**.inl",
             "odm/**.cpp"
         }

@@ -1,23 +1,21 @@
 #pragma once
-#include "Transform_mat.hpp"
-
 namespace odm
 {
 	Matrix4x4 translate(const Matrix4x4& m, const Vector3f& v)
 	{
-		mat4 Result(m);
+		auto Result(m);
  		Result[3] = m[0] * v[0] + m[1] * v[1] + m[2] * v[2] + m[3];
 		return Result;
 	}
 
 	Matrix4x4 rotate(const Matrix4x4& m, const float angle, const Vector3f& v)
 	{
-		float const a = angle;
-		float const c = cos(a);
-		float const s = sin(a);
+		auto const a = angle;
+		auto const c = cos(a);
+		auto const s = sin(a);
 
-		const vec3 axis(vec3::Normalize(v));
-		const vec3 temp((float(1) - c) * axis);
+		const auto axis(vec3::Normalize(v));
+		const auto temp((float(1) - c) * axis);
 
 		Matrix4x4 Rotate;
 		Rotate[0][0] = c + temp[0] * axis[0];
@@ -40,9 +38,9 @@ namespace odm
 		return Result;
 	}
 
-	const Matrix4x4 scale(const Matrix4x4& m, const Vector3f& v)
+	Matrix4x4 scale(const Matrix4x4& m, const Vector3f& v)
 	{
-		Matrix4x4 Result(m);
+		auto Result(m);
 		Result[0][0] = m[0][0] * v[0];
 		Result[1][1] = m[1][1] * v[1];
 		Result[2][2] = m[2][2] * v[2];
@@ -50,14 +48,13 @@ namespace odm
 		return Result;
 	}
 
-	
 	Matrix4x4 lookAt(const Vector3f& eye, const Vector3f& center, const Vector3f& up)
 	{
-		vec3 const f(vec3::Normalize(center - eye));
-		vec3 const s(vec3::Normalize(vec3::Cross(f, up)));
-		vec3 const u(vec3::Cross(s, f));
+		auto const f(vec3::Normalize(center - eye));
+		auto const s(vec3::Normalize(vec3::Cross(f, up)));
+		auto const u(vec3::Cross(s, f));
 
-		Matrix4x4 Result(1);
+		Matrix4x4 Result(1.0f);
 		Result[0][0] = s.x;
 		Result[1][0] = s.y;
 		Result[2][0] = s.z;
@@ -73,9 +70,9 @@ namespace odm
 		return Result;
 	}
 
-	Matrix4x4 setPosition(const Matrix4x4& mat, const vec3f position)
+	Matrix4x4 setPosition(const Matrix4x4& mat, const vec3f &position)
 	{
-		mat4 Result(mat);
+		auto Result(mat);
 		Result[3] = vec4(position, mat[3][3]);
 		return Result;
 	}

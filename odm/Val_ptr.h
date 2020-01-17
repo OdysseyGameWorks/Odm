@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Vector2f.hpp"
-#include "Vector3f.hpp"
-#include "Vector4f.hpp"
-#include "Mat4x4.hpp"
+#include "Vector2f.h"
+#include "Vector3f.h"
+#include "Vector4f.h"
+#include "Mat4x4.h"
 
 namespace odm
 {

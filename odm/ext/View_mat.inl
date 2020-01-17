@@ -1,8 +1,5 @@
 #pragma once
 
-#include "../Mat4x4.hpp"
-#include "View_mat.hpp"
-
 namespace odm
 {
 	Matrix4x4 orthographic(float left, float right, float top, float bottom, float nearPlane, float farPlane)
@@ -17,10 +14,10 @@ namespace odm
 		return result;
 	}
 
-	Matrix4x4 perspective(float _fov, float aspectRatio, float nearPlane, float farPlane)
+	Matrix4x4 perspective(float fov, float aspectRatio, float nearPlane, float farPlane)
 	{
 		Matrix4x4 Result(0.0f);
-		float const tanHalfFovy = tan(_fov / static_cast<float>(2));
+		float const tanHalfFovy = tan(fov / static_cast<float>(2));
 		Result[0][0] = static_cast<float>(1) / (aspectRatio * tanHalfFovy);
 		Result[1][1] = static_cast<float>(1) / (tanHalfFovy);
 		Result[2][2] = -(farPlane + nearPlane) / (farPlane - nearPlane);

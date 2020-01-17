@@ -9,31 +9,32 @@
 #ifndef _COLOR_H_
 #define _COLOR_H_
 
-#define OneOver255 (1.0f / 255.0f)
-
-#include "Vector4f.hpp"
+#include <string>
+#include "Vector4f.h"
 
 namespace odm
 {
+	constexpr auto OneOver255 = (1.0f / 255.0f);
+	
 	struct Color
 	{
-		float r,
-			g,
-			b,
-			a;
+		float r; 
+		float g; 
+		float b; 
+		float a;
 
 		/**
 		 * Constructs a color.
-		 * Sets a black color.
-		*/
-		__forceinline Color();
+		 * Sets all rgb elements to 0.
+		 */
+		Color();
 
 
 		/**
 		 * Constructs a color by copying from the other color object.
 		 * @param color Object to copy the values from.
-		*/
-		__forceinline Color(const Color& color) = default;
+		 */
+		Color(const Color& color) = default;
 
 
 		/**
@@ -42,65 +43,52 @@ namespace odm
 		 * @param gf Sets the Green component.
 		 * @param bf Sets the Blue component.
 		 * @param af Sets the Alpha component.
-		*/
-		__forceinline explicit Color(float rf, float gf, float bf, float af = 1.0f);
+		 */
+		explicit Color(float rf, float gf, float bf, float af = 1.0f);
 
 		
 		/**
 		 * Constructs a color by copying values from vector4.
 		 * @param vector Vector4 to copy the values of rgba channels.
-		*/
-		__forceinline explicit Color(const Vector4f& vector);
+		 */
+		explicit Color(const Vector4f& vector);
 
 
 		/**
 		 * Constructs a color by copying values from vector3.
 		 * Alpha value is by default set to 1.0f.
 		 * @param vector Vector3 to copy the values of rgb channels.
-		*/
-		__forceinline explicit Color(const Vector3f& vector);
+		 */
+		explicit Color(const Vector3f& vector);
 
 
 		/** Destructor */
-		__forceinline ~Color() = default;
-
-	public:
-		
-		// --- OPERATORS ---
+		~Color() = default;
 
 		/**
 		 * Checks the equality of two color values.
 		 * @param c The color to compare with.
 		 * @returns True if the compared color is equal.
 		*/
-		__forceinline bool operator==(const Color& c) const;
+		inline bool operator==(const Color& c) const;
 
 		/**
 		 * Checks the non-equality of two color values.
 		 * @param c The color to compare with.
-		 * * @returns True if the compared color is not equal.
+		 * @returns True if the compared color is not equal.
 		*/
-		__forceinline bool operator!=(const Color& c) const;
-
-	public:
-
-		// --- METHODS ---
+		bool operator!=(const Color& c) const;
 
 		/**
 		 * Sets the color between 0 to 1.
 		 * @param c Takes the color to be converted to lower scale.
 		 * @returns RGBA color between the range of 0 to 1. 
 		 */
-		__forceinline static Color toSmallerScale(const Color& c);
+		static Color to8bit(const Color& c);
+		static Color toSmallerScale(float r, float g, float b, float a);
+		
+		static std::string Stringify(const Color& c);
 
-		__forceinline static Color toSmallerScale(float r, float g, float b, float a);
-
-		__forceinline static std::string Stringify(const Color& c);
-
-
-	public:
-
-		// --- LISTS OF SOME COMMON COLORS ---
 
 		static const Color White;
 		static const Color Red;
@@ -201,48 +189,45 @@ namespace odm
 		static const Color VioletRed;
 		static const Color Wheat;
 		static const Color YellowGreen;
-
-	public:
-
 	};
 
-	__forceinline Color::Color() {
+	inline Color::Color() {
 		r = g = b = 0.0f, a = 1.0f;
 	}
 
-	__forceinline Color::Color(float rf, float gf, float bf, float af)
+	inline Color::Color(float rf, float gf, float bf, float af)
 		: r(rf), g(gf), b(bf), a(af)
 	{}
 
-	__forceinline Color::Color(const Vector4f& vector)
+	inline Color::Color(const Vector4f& vector)
 		: r(vector.x), g(vector.y), b(vector.z), a(vector.w)
 	{}
 
-	__forceinline Color::Color(const Vector3f& vector)
+	inline Color::Color(const Vector3f& vector)
 		: r(vector.x), g(vector.y), b(vector.z), a(1.0f)
 	{}
 
-	__forceinline bool Color::operator==(const Color & c) const
+	inline bool Color::operator==(const Color & c) const
 	{
 		return (r == c.r && g == c.g && b == c.b && a == c.a);
 	}
 
-	__forceinline bool Color::operator!=(const Color& c) const
+	inline bool Color::operator!=(const Color& c) const
 	{
 		return !(r == c.r && g == c.g && b == c.b && a == c.a);
 	}
 
-	__forceinline Color Color::toSmallerScale(const Color& c)
+	inline Color Color::to8bit(const Color& c)
 	{
 		return Color(c.r * OneOver255, c.g * OneOver255, c.b * OneOver255, c.a * OneOver255);
 	}
 
-	__forceinline Color Color::toSmallerScale(float r, float g, float b, float a)
+	inline Color Color::toSmallerScale(float r, float g, float b, float a)
 	{
 		return Color(r * OneOver255, g * OneOver255, b * OneOver255, a * OneOver255);
 	}
 
-	__forceinline std::string Color::Stringify(const Color& c)
+	inline std::string Color::Stringify(const Color& c)
 	{
 		
 	}

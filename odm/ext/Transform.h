@@ -3,7 +3,7 @@
 #ifndef _TRANSFORM_H_
 #define _TRANSFORM_H_
 
-#include "Transform_mat.hpp"
+#include "Transform_mat.h"
 
 namespace odm
 {
@@ -30,7 +30,7 @@ namespace odm
 }
 
 #else
-#error Transform header had already been included
+#error Transform header had already been included!
 #endif
 
 #include "Transform.inl"

@@ -1,4 +1,3 @@
-#include "Transform.hpp"
 namespace odm
 {
 	Matrix4x4 static translate(const Vector3f& v)
