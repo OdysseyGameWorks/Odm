@@ -91,15 +91,15 @@ namespace odm
 		return AABB(
 			(transform * Center()) - vec3 (
 			(abs(transform.m[0][0]) * (GetSize() * 0.5f).x) + (abs(transform.m[0][1]) * (GetSize() * 0.5f).y) + (abs(transform.m[0][2]) * (GetSize() * 0.5f).z),
-				(abs(transform.m[1][0]) * (GetSize() * 0.5f).x) + (abs(transform.m[1][1]) * (GetSize() * 0.5f).y) + (abs(transform.m[1][2]) * (GetSize() * 0.5f).z),
-				(abs(transform.m[2][0]) * (GetSize() * 0.5f).x) + (abs(transform.m[2][1]) * (GetSize() * 0.5f).y) + (abs(transform.m[2][2]) * (GetSize() * 0.5f).z)
+			(abs(transform.m[1][0]) * (GetSize() * 0.5f).x) + (abs(transform.m[1][1]) * (GetSize() * 0.5f).y) + (abs(transform.m[1][2]) * (GetSize() * 0.5f).z),
+			(abs(transform.m[2][0]) * (GetSize() * 0.5f).x) + (abs(transform.m[2][1]) * (GetSize() * 0.5f).y) + (abs(transform.m[2][2]) * (GetSize() * 0.5f).z)
 			),
 
 			(transform * Center()) + 
 			vec3(
 			(abs(transform.m[0][0]) * (GetSize() * 0.5f).x) + (abs(transform.m[0][1]) * (GetSize() * 0.5f).y) + (abs(transform.m[0][2]) * (GetSize() * 0.5f).z),
-				(abs(transform.m[1][0]) * (GetSize() * 0.5f).x) + (abs(transform.m[1][1]) * (GetSize() * 0.5f).y) + (abs(transform.m[1][2]) * (GetSize() * 0.5f).z),
-				(abs(transform.m[2][0]) * (GetSize() * 0.5f).x) + (abs(transform.m[2][1]) * (GetSize() * 0.5f).y) + (abs(transform.m[2][2]) * (GetSize() * 0.5f).z)
+			(abs(transform.m[1][0]) * (GetSize() * 0.5f).x) + (abs(transform.m[1][1]) * (GetSize() * 0.5f).y) + (abs(transform.m[1][2]) * (GetSize() * 0.5f).z),
+			(abs(transform.m[2][0]) * (GetSize() * 0.5f).x) + (abs(transform.m[2][1]) * (GetSize() * 0.5f).y) + (abs(transform.m[2][2]) * (GetSize() * 0.5f).z)
 		));
 	}
 

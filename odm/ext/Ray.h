@@ -5,7 +5,6 @@
 
 namespace odm
 {
-
 	class Ray
 	{
 	public:
