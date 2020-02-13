@@ -5,6 +5,7 @@
 
 #include <cassert>
 #include "MathUtil.h"
+#include "Defines.h"
 
 namespace odm
 {
@@ -73,19 +74,33 @@ namespace odm
 		 * Calculates the absolute value of the vector coordinates.
 		 * @return Abs value of this Vector.
 		 */
-		Vector3f Abs() const;
+		NODISCARD Vector3f Abs() const;
 
 		/**
 		 * Returns the length of the vector
 		*/
-		float Length() const;
+		NODISCARD float Length() const;
+
+		float LengthSquared() const;
 
 		/**
 		 * Calculates the distance between two vectors.
 		 * @param v Vector from which distance will be calculated.
 		 * @return distance between two vectors in float.
 		 */
-		[[nodiscard]] float Distance(const Vector3f& v) const;
+		NODISCARD float Distance(const Vector3f& v) const;
+
+		/**
+		 * Compares the vectors for the Maximum Bound value.
+		 * @return New Vector having maximum Bound values from a and b.
+		 */
+		NODISCARD static Vector3f Max(const Vector3f& a, const Vector3f& b);
+
+		/**
+		 * Compares the vectors for the Minimum Bound value.
+		 * @return New Vector having minimum Bound values from a and b.
+		 */
+		NODISCARD static Vector3f Min(const Vector3f& a, const Vector3f& b);
 
 		/**
 		 * Calculates the distance between two vectors.
@@ -100,7 +115,7 @@ namespace odm
 		 * @param v Vector which would be dot multiplied.
 		 * @return dot product between two vectors in Vector3.
 		 */
-		[[nodiscard]] float Dot(const Vector3f& v) const;
+		NODISCARD float Dot(const Vector3f& v) const;
 
 		/**
 		 * Calculates the dot product two vectors.
@@ -123,11 +138,10 @@ namespace odm
 		 * @param v Vector which would be cross multiplied.
 		 * @return distance between two vectors in Vector3.
 		 */
-		[[nodiscard]] Vector3f __cdecl Cross(const Vector3f& v) const;
-
+		NODISCARD Vector3f Cross(const Vector3f& v) const;
 
 		/** Returns the normalized vector. */
-		[[nodiscard]] Vector3f __cdecl Normalize() const;
+		NODISCARD Vector3f Normalize() const;
 
 		/** 
 		 * Returns the normalized vector.
@@ -236,9 +250,32 @@ namespace odm
 		return (sqrt(x * x + y * y + z * z));
 	}
 
+	inline float Vector3f::LengthSquared() const
+	{
+		return ((x * x + y * y + z * z));
+	}
+
 	inline float Vector3f::Distance(const Vector3f& v) const
 	{
 		return sqrt((x - v.x * x - v.x) + (y - v.y * y - v.y) + (z - v.z * z - v.z));
+	}
+
+	inline Vector3f Vector3f::Max(const Vector3f& a, const Vector3f& b)
+	{
+		return Vector3f(
+			MathF::Max(a.x, b.x),
+			MathF::Max(a.y, b.y),
+			MathF::Max(a.z, b.z)
+		);
+	}
+
+	inline Vector3f Vector3f::Min(const Vector3f& a, const Vector3f& b)
+	{
+		return Vector3f(
+			MathF::Max(a.x, b.x),
+			MathF::Min(a.y, b.y),
+			MathF::Min(a.z, b.z)
+		);
 	}
 
 	inline float Vector3f::Distance(const Vector3f & v1, const Vector3f & v2)
@@ -274,7 +311,8 @@ namespace odm
 
 	inline Vector3f Vector3f::Normalize() const
 	{
-		const auto length_squared = Length() * Length();
+		const float length = Length();
+		const auto length_squared = length * length;
 		if (!(length_squared == 1.0f) && length_squared > 0.0f) {
 			return (*this) * (1.0f / sqrt(length_squared));
 		} return *this;

@@ -9,6 +9,7 @@
 
 namespace odm
 {
+	struct Vector3f;
 
 	struct Vector4f
 	{

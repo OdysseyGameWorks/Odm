@@ -3,6 +3,7 @@
 namespace odm
 {
 	Ray::Ray(const vec3f& start, const vec3f& end)
+		: m_Start(start), m_End(end), m_Direction(end - start), m_Length(0.0f)
 	{
 	}
 

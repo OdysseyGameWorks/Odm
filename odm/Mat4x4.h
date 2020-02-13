@@ -41,7 +41,7 @@ namespace odm
 		 * @param f sets the diagonal values to f
 		 */
 		inline Matrix4x4(float f);
-	
+
 		/**
 		 * Constructs a 4x4 matrix.
 		 * Initializes all the elements according to arguments.

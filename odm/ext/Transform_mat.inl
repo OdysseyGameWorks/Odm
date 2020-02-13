@@ -8,7 +8,7 @@ namespace odm
 		return Result;
 	}
 
-	Matrix4x4 rotate(const Matrix4x4& m, const float angle, const Vector3f& v)
+	Matrix4x4 rotate(const Matrix4x4& m, float angle, const Vector3f& v)
 	{
 		auto const a = angle;
 		auto const c = cos(a);

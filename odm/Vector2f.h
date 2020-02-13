@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <initializer_list>
 #include "Vector3f.h"
 
 namespace odm
@@ -20,7 +21,7 @@ namespace odm
 
 		/**
 		 * Constructs a 2D vector.
-		 * Initializes all coord to 0.
+		 * Initializes all Coordinate to 0.
 		*/
 		Vector2f();
 
@@ -32,14 +33,14 @@ namespace odm
 
 		/**
 		 * Constructs from single float argument.
-		 * @param f Initial value for XYZ coord.
+		 * @param f Initial value for XYZ Coordinate.
 		*/
 		Vector2f(float f);
 
 		/**
 		 * Constructs from two float arguments.
-		 * @param x Initial value for X coord.
-		 * @param y Initial value for Y coord.
+		 * @param x Initial value for X Coordinate.
+		 * @param y Initial value for Y Coordinate.
 		*/
 		Vector2f(float x, float y);
 
@@ -76,6 +77,7 @@ namespace odm
 		Vector2f operator/(float f) const;
 		
 		void operator-();
+		Vector2f operator-() const;
 	};
 
 	typedef Vector2f vec2;
@@ -222,5 +224,15 @@ namespace odm
 			x / f,
 			y / f
 		);
+	}
+
+	inline void Vector2f::operator-()
+	{
+		x = -x; y = -y;
+	}
+
+	inline Vector2f Vector2f::operator-() const
+	{
+		return Vector2f(-x, -y);
 	}
 }

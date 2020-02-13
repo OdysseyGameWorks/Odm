@@ -3,19 +3,23 @@
 #ifndef AABB_H
 #define AABB_H
 
-#include "../Vector2f.h"
-#include "../Vector3f.h"
+#include "../Mat4x4.h"
+#include "../Vector4f.h"
+#include "Rectangle.h"
 
 #include <cmath>
+#include <cstdlib>
 
-#include "Rectangle.h"
-#include "../Mat4x4.h"
 
 namespace odm
 {
 	struct Rectangle;
+
+	// Axis-aligned bounding box
 	struct AABB
 	{
+		static const size_t CORNER_COUNT = 8;
+
 		vec3 min;
 		vec3 max;
 
@@ -26,28 +30,29 @@ namespace odm
 		AABB(float x, float y, float width, float height);
 		AABB(float x, float y, float z, float width, float height, float depth);
 
-		bool Intersects(const AABB& other) const;
-		bool Contains(const vec2& point, float tolerance = 0.0f) const;
-		bool Contains(const vec3& point, float tolerance = 0.0f) const;
+		NODISCARD bool Intersects(const AABB& other) const;
+		NODISCARD bool Contains(const vec2& point, float tolerance = 0.0f) const;
+		NODISCARD bool Contains(const vec3& point, float tolerance = 0.0f) const;
 
+		void Add(const AABB& bb);
+		void ClipToBox(AABB const& bb);
 
-		AABB TransformToAABB(const Matrix4x4& transform) const;
+		NODISCARD AABB TransformToAABB(const Matrix4x4& transform) const;
 
-		vec3 GetSize() const;
-		vec3 GetExtents() const;
-		vec3 Center() const;
+		NODISCARD vec3 GetSize() const;
+		NODISCARD vec3 GetExtents() const;	// Distance from the center to each side.
+		NODISCARD vec3 Center() const;		// Center of the box.
 
-		vec3 GetMin() const;
-		vec3 GetMax() const;
+		NODISCARD vec3 GetMin() const;
+		NODISCARD vec3 GetMax() const;
 
-		int LargestAxis() const;
+		NODISCARD int LargestAxis() const;
 		
 		bool operator==(const AABB& other) const;
 		bool operator!=(const AABB& other) const;
 
 		bool operator<(const AABB& other) const;
 		bool operator>(const AABB& other) const;
-
 	};
 
 	inline AABB::AABB()
@@ -79,11 +84,23 @@ namespace odm
 	}
 
 	inline bool AABB::Contains(const vec2& point, float tolerance) const {
-		return vec3(point) > min && vec3(point) < max;
+		return point + tolerance > min && point - tolerance < max;
 	}
 
 	inline bool AABB::Contains(const vec3& point, float tolerance) const {
 		return point + tolerance > min && point - tolerance < max;
+	}
+
+	inline void AABB::Add(const AABB& bb)
+	{
+		min = Vector3f::Min(min, bb.min);
+		max = Vector3f::Max(max, bb.max);
+	}
+
+	inline void AABB::ClipToBox(AABB const& bb)
+	{
+		min = Vector3f::Max(min, bb.min);
+		max = Vector3f::Min(max, bb.max);
 	}
 
 	inline AABB AABB::TransformToAABB(const Matrix4x4& transform) const
